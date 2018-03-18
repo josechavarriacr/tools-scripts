@@ -1,13 +1,18 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-18 01:15:51
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-18 01:41:35
+# @Last Modified time: 2018-03-18 02:29:24
 
 
  #!/bin/sh
- db = "name_db"
- filename="./path/to/dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
- mysqldump -u root -p $db > /respaldosql/db2.sql
- cd /home/youuser/backupsql/
- tar -zcvf backupsql_$(date +%d%m%y).tgz *.sql
- find -name '*.tgz' -type f -mtime +2 -exec rm -f {} \;
+ db="test"
+ user="root"
+ path="/home/jose/Projects/lab/"
+ new_dir=`date +%Y-%m-%d`
+ cd $path 
+ sudo mkdir -p $new_dir
+ cd $new_dir
+ filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
+ echo "Database name $filename..."
+ mysqldump -u $user -p $db > $filename
+ echo "Saved database to $path$new_dir..."
