@@ -1,7 +1,7 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-25 15:08:00
+# @Last Modified time: 2018-03-25 15:09:51
 
 #!/bin/bash
 
@@ -16,8 +16,8 @@ if [ $? -eq 0 ]; then
 	read db
 	echo "You selected: $db"
 	path="/home/jose/Projects/lab/"
-	cd $path 
 	sudo mkdir -p $path
+	cd $path 
 	new_dir=`date +%Y-%m-%d`
 	sudo mkdir -p $new_dir
 	cd $new_dir
