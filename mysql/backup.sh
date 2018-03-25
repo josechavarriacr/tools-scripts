@@ -1,7 +1,7 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-25 15:09:51
+# @Last Modified time: 2018-03-25 15:12:43
 
 #!/bin/bash
 
@@ -21,7 +21,7 @@ if [ $? -eq 0 ]; then
 	new_dir=`date +%Y-%m-%d`
 	sudo mkdir -p $new_dir
 	cd $new_dir
-	filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
+	filename="$db-$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
 	echo "Database name $filename..."
 
 	mysqldump -u $user -p$pass $db > $filename
