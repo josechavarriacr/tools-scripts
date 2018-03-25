@@ -1,9 +1,11 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-25 14:49:22
+# @Last Modified time: 2018-03-25 14:55:49
 
 #!/bin/bash
+
+cd $path 
 
 #Start Input Pass MySQL
 echo "Welcome to BackUp Manager"
@@ -16,16 +18,14 @@ if [ $? -eq 0 ]; then
 	echo "You selected: $db"
 	user="root"
 	path="/home/jose/Projects/lab/"
-	cd $path 
 	new_dir=`date +%Y-%m-%d`
 	sudo mkdir -p $new_dir
 	cd $new_dir
-	if [ $? -eq 0 ]; then
-		filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
-		echo "Database name $filename..."
+	filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
+	echo "Database name $filename..."
 
-		mysqldump -u $user -p$pass $db > $filename
-		if [ $? -eq 0 ]; then
+	mysqldump -u $user -p$pass $db > $filename
+	if [ $? -eq 0 ]; then
 		#Start Animated
 		count=0
 		total=10
@@ -41,9 +41,6 @@ if [ $? -eq 0 ]; then
 	else
 		echo "Database name not exists"
 	fi
-else
-	echo "Can't access path to save"
-fi
 else
 	echo "Password is incorrect"
 fi
