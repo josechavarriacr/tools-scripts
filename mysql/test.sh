@@ -1,7 +1,47 @@
 # @Author: Jose Chavaría
-# @Date:   2018-03-18 01:50:12
+# @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-18 02:16:15
-mysqldump -u root -p test > backup_name.sql
+# @Last Modified time: 2018-03-25 14:32:57
 
-mysqldump -uuser -ppass --single-transaction --routines --triggers --all-databases > backup_db.sql
+#!/bin/bash
+
+#Start Input Pass MySQL
+echo "Welcome to BackUp Manager"
+echo "Input your MySQL password for root :"
+read pass
+mysql -u root -p$pass -e 'show databases;'
+if [ $? -eq 0 ]; then
+	echo "Select One Database: "
+	read db
+	echo "You selected: $db"
+	user="root"
+	path="/home/jose/Projects/lab/"
+	new_dir=`date +%Y-%m-%d`
+	cd $path 
+	sudo mkdir -p $new_dir
+	cd $new_dir
+	filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
+	echo "Database name $filename..."
+
+	mysqldump -u $user -p$pass $db > $filename
+	if [ $? -eq 0 ]; then
+		#Start Animated
+		count=0
+		total=10
+		pstr="[=======================================================================]"
+		while [ $count -lt $total ]; do
+			sleep 0.5 
+			count=$(( $count + 1 ))
+			pd=$(( $count * 73 / $total ))
+			printf "\r%3d.%1d%% %.${pd}s" $(( $count * 100 / $total )) $(( ($count * 1000 / $total) % 10 )) $pstr
+		done
+		#End Animated
+		echo "Saved database to $path$new_dir"
+	else
+		echo "Database name not exists"
+	fi
+else
+	echo "Password is incorrect"
+fi
+#End Input Pass MySQL
+
