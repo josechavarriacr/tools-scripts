@@ -1,7 +1,7 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-25 14:43:38
+# @Last Modified time: 2018-03-25 14:49:22
 
 #!/bin/bash
 
@@ -20,11 +20,12 @@ if [ $? -eq 0 ]; then
 	new_dir=`date +%Y-%m-%d`
 	sudo mkdir -p $new_dir
 	cd $new_dir
-	filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
-	echo "Database name $filename..."
-
-	mysqldump -u $user -p$pass $db > $filename
 	if [ $? -eq 0 ]; then
+		filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
+		echo "Database name $filename..."
+
+		mysqldump -u $user -p$pass $db > $filename
+		if [ $? -eq 0 ]; then
 		#Start Animated
 		count=0
 		total=10
@@ -40,6 +41,9 @@ if [ $? -eq 0 ]; then
 	else
 		echo "Database name not exists"
 	fi
+else
+	echo "Can't access path to save"
+fi
 else
 	echo "Password is incorrect"
 fi
