@@ -1,7 +1,7 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-25 14:33:12
+# @Last Modified time: 2018-03-25 14:43:38
 
 #!/bin/bash
 
@@ -16,8 +16,8 @@ if [ $? -eq 0 ]; then
 	echo "You selected: $db"
 	user="root"
 	path="/home/jose/Projects/lab/"
-	new_dir=`date +%Y-%m-%d`
 	cd $path 
+	new_dir=`date +%Y-%m-%d`
 	sudo mkdir -p $new_dir
 	cd $new_dir
 	filename="$new_dir-`date +%Y-%m-%d.%H-%M-%S`.sql"
