@@ -1,23 +1,22 @@
 # @Author: Jose Chavaría
 # @Date:   2018-03-25 13:50:19
 # @Last Modified by:   Jose Chavaría
-# @Last Modified time: 2018-03-25 14:55:49
+# @Last Modified time: 2018-03-25 15:04:39
 
 #!/bin/bash
 
-cd $path 
-
 #Start Input Pass MySQL
 echo "Welcome to BackUp Manager"
-echo "Input your MySQL password for root :"
-read pass
+echo "Input your MySQL login details :"
+read -p 'Username: ' user
+read -p 'Password: ' pass
 mysql -u root -p$pass -e 'show databases;'
 if [ $? -eq 0 ]; then
 	echo "Select One Database: "
 	read db
 	echo "You selected: $db"
-	user="root"
 	path="/home/jose/Projects/lab/"
+	cd $path 
 	new_dir=`date +%Y-%m-%d`
 	sudo mkdir -p $new_dir
 	cd $new_dir
