@@ -40,3 +40,12 @@ alias grs="git reset --soft"
 alias grh="git reset --hard"
 alias gcob="git checkout -b"
 alias gpom="git pull origin master"
+alias randomCommit="curl http://whatthecommit.com/index.txt"
+
+# functions 
+function getRandomCommit
+    set foo (curl --silent --fail http://whatthecommit.com/index.txt) &&
+    echo "random Commit => $foo" &&
+    git commit -m "$foo"
+end
+
